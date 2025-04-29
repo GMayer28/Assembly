@@ -1,0 +1,39 @@
+
+
+
+
+
+.data
+kp:      .asciiz "digite os km percorrido:"
+kf:      .asciiz "quantidade de km faltante:"
+
+.text
+#Leitura de quantos KM foram percorridos
+li $v0, 4       #prepara o registrador para imprimir uma string
+la $a0, kp      #a0 == kp
+syscall         #Executa a ação
+
+li $v0, 5       #Leitura de um valor inteiro
+syscall     
+move $t0, $v0   #Mover v0 para t0
+
+#Definir o nosso percurso total
+
+li $t1, 20      #t1 recebe 20KM, o percurso total da corrida
+
+#realizar a operação de subtração
+
+sub $t2, $t1, $t0      #t2 = t1 - t0
+li $v0, 4     #Imprimir uma string
+la $a0, kf    #a0 == kf
+syscall
+
+li $v0, 1     #Imprimir um numero inteiro
+la $a0, ($t2)   #a0 == t2 = kf
+syscall
+
+li $v0, 10   #Prepara o processador para finalizar
+syscall
+
+
+
